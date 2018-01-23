@@ -1,8 +1,3 @@
-// FETCH
-// ----------
-require('es6-promise').polyfill();
-require('isomorphic-fetch');
-
 // DOTENV
 // ----------
 require('dotenv').config();
@@ -14,12 +9,23 @@ const app = express();
 
 // QUANDL API
 // ----------
-const urlFormatter = () => {};
+const dataService = require('./quandlData');
 
 // ROUTES
 // ----------
 app.get('/', (req, res) => {
   res.send('hello world');
+});
+
+app.get('/getEodData', (req, res) => {
+  const requestedStocks = req.query.stocks;
+  const requestedDates = req.query.dates;
+  dataService.getData(requestedStocks, requestedDates)
+  .then(json => {
+    console.log("server response",json);
+    res.json(json)
+    
+  });
 });
 
 // ERROR HANDLING
