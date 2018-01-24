@@ -15,7 +15,7 @@ const ColumnHeadings = () => {
 
 const Filter = () => {
   return null;
-}
+};
 
 
 class StocksTableContainer extends Component {
