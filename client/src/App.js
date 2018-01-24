@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <div className="App container-fluid">
         <div className="row show-border">
-          <div className="col">
+          <div className="col show-border">
             <StocksTableContainer />
           </div>
           <div className="col">
