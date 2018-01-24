@@ -1,6 +1,20 @@
 import React, { Component } from 'react';
-import Slider from 'react-rangeslider'
-import BootstrapTable from 'reactjs-bootstrap-table';
+import {
+  NavLink,
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
+import Slider from 'react-rangeslider';
+import StocksTableContainer from './containers/StocksTableContainer';
+import TradeContainer from './containers/TradeContainer';
+import TransactionsContainer from './containers/TransactionsContainer';
+import PortfolioContainer from './containers/PortfolioContainer';
+
+const SelectAction = () => {
+  return null;
+};
+
 
 class App extends Component {
   render() {
@@ -8,9 +22,7 @@ class App extends Component {
       <div className="App container-fluid">
         <div className="row show-border">
           <div className="col">
-            <BootstrapTable columns={0} data={0} headers={true}>
-              <div className="well">There are no items to show</div>
-            </BootstrapTable>
+            <StocksTableContainer />
           </div>
           <div className="col">
             <div className="row show-border">
@@ -26,9 +38,14 @@ class App extends Component {
             </div>
             <div className="row show-border">
               <div className="col">
-                <BootstrapTable columns={0} data={0} headers={true}>
-                  <div className="well">There are no items to show</div>
-                </BootstrapTable>
+                <SelectAction />
+                <Router>
+                  <Switch>
+                    <Route path='/trade' component={TradeContainer} />
+                    <Route path='/transactions' component={TransactionsContainer} />
+                    <Route path='/portfolio' component={PortfolioContainer} />
+                  </Switch>
+                </Router>
               </div>
             </div>
           </div>
