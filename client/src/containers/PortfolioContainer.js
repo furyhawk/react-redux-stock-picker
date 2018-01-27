@@ -1,32 +1,6 @@
 import React, {Component} from 'react';
 import {Table} from 'reactstrap';
-
-const SummaryColumnHeadings = () => {
-  const headings = [
-    "Cost Basis",
-    "Current Value",
-    "Profit/Loss",
-    "7d",
-    "14d",
-    "28d"
-  ];
-  return headings.map((header, i) => <th key={i}>{header}</th>);
-};
-const DetailColumnHeadings = () => {
-  const headings = [
-    "Symbol",
-    "Quantity",
-    "Cost Basis",
-    "Current Value",
-    "Profit/Loss",
-    "Current Price",
-    "7d",
-    "14d",
-    "28d",
-    "Trade?",
-  ];
-  return headings.map((header, i) => <th key={i}>{header}</th>);
-};
+import ColumnHeadings from '../components/ColumnHeadings';
 
 
 class PortfolioContainer extends Component {
@@ -36,7 +10,9 @@ class PortfolioContainer extends Component {
         <Table>
           <thead>
             <tr>
-              <SummaryColumnHeadings />
+              <ColumnHeadings 
+                headings={["Cost Basis","Current Value","Profit/Loss","7d","14d","28d"]}
+              />
             </tr>
           </thead>
           <tbody>
@@ -53,7 +29,11 @@ class PortfolioContainer extends Component {
          <Table>
           <thead>
             <tr>
-              <DetailColumnHeadings />
+              <ColumnHeadings 
+                headings = {[ 
+                  "Symbol","Quantity","Cost Basis","Current Value","Profit/Loss","Current Price","7d","14d","28d","Trade?"
+                ]} 
+              />
             </tr>
           </thead>
           <tbody>

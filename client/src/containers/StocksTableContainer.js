@@ -1,65 +1,43 @@
 import React, {Component} from 'react';
-import {Table} from 'reactstrap';
+import {connect} from 'react-redux';
+import {getStocks} from '../actions/StocksActions';
+import StocksTable from '../components/StocksTable';
+const stocksDefaultList = require('../default-settings/defaultSettings');
 
-const ColumnHeadings = () => {
-  const headings = [
-    "Symbol",
-    "Price",
-    "7d",
-    "14d",
-    "28d",
-    "Trade"
-  ];
-  return headings.map((header, i) => <th key={i}>{header}</th>);
-};
 
 const Filter = () => {
   return null;
 };
 
+const mapStateToProps = (state) => {
+  return {
+    stocks: state.stocks,
+    date: state.date
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getStocks: (selectedStocks, selectedDates) => {
+      dispatch(getStocks(selectedStocks, selectedDates));
+    }
+  };
+};
 
 class StocksTableContainer extends Component {
+  componentDidMount() {
+    console.log("componentDidMount","calling getStocks");
+    this.props.getStocks(stocksDefaultList, ['2017-12-27','2017-12-20','2017-12-13','2017-12-6']);
+  }
+  
   render() {
     return (
       <div>
         <Filter />
-        <Table>
-          <thead>
-            <tr>
-              <ColumnHeadings />
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </Table>
+        <StocksTable stocks={this.props.stocks} dates={this.props.dates}/>
       </div>
     );
   }
-  
 }
 
-export default StocksTableContainer
+export default connect(mapStateToProps, mapDispatchToProps)(StocksTableContainer)

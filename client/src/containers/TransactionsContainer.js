@@ -1,16 +1,7 @@
 import React, {Component} from 'react';
 import {Table} from 'reactstrap';
+import ColumnHeadings from '../components/ColumnHeadings';
 
-const ColumnHeadings = () => {
-  const headings = [
-    "Date",
-    "Symbol",
-    "Type",
-    "Quantity",
-    "Price"
-  ];
-  return headings.map((header, i) => <th key={i}>{header}</th>);
-};
 
 const Filter = () => {
   return null;
@@ -25,7 +16,9 @@ class TransactionsContainer extends Component {
         <Table>
           <thead>
             <tr>
-              <ColumnHeadings />
+              <ColumnHeadings 
+                headings= {["Date","Symbol","Type","Quantity","Price"]}
+              />
             </tr>
           </thead>
           <tbody>
