@@ -3,7 +3,7 @@ import * as StocksActions from './actions/StocksActions';
 import moment from 'moment';
 
 const initialState = {
-  date: moment().format('YYYY-MM-DD'),
+  date: ['2017-12-27','2017-12-20','2017-12-13'],
   stocks: {
     isFetching: false,
     data: {},
@@ -11,7 +11,7 @@ const initialState = {
   },
 };
 
-const stocks = (state = initialState.stocks, action) => {
+const stocks = (state = initialState, action) => {
   switch (action.type) {
     case StocksActions.GET_STOCKS_REQUEST: {
       return {

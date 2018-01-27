@@ -3,6 +3,8 @@ import {Table} from 'reactstrap';
 import ColumnHeadings from '../components/ColumnHeadings';
 import moment from 'moment';
 
+
+
 const StocksTable = (stocks, dates) => {
   const colHeadings = [
     "Symbol",
