@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {Table} from 'reactstrap';
 import ColumnHeadings from '../components/ColumnHeadings';
 
 
 class PortfolioContainer extends Component {
+  
   render(){
     return (
       <div>
+        <h4>Cash On Hand:  </h4>
         <Table>
           <thead>
             <tr>
@@ -68,4 +71,13 @@ class PortfolioContainer extends Component {
   }
 }
 
-export default PortfolioContainer;
+const mapStateToProps = (state) => {
+  return {
+    cash: state.portfolio.cash,
+    history: state.portfolio.history
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+export default connect(mapStateToProps, mapDispatchToProps)(PortfolioContainer);

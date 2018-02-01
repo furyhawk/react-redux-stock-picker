@@ -1,41 +1,46 @@
 import React from 'react';
 import {Table} from 'reactstrap';
+import {Link} from 'react-router-dom';
 import ColumnHeadings from '../components/ColumnHeadings';
 import moment from 'moment';
 
-
-
-const StocksTable = (stocks, dates) => {
+const StocksTable = ({stocks, dates, setCurrentTicker, currentDate}) => {
+  console.log("StocksTable", "stocks",stocks,"dates",dates);
   const colHeadings = [
     "Symbol",
-    "Price",
     ...dates.map(date => moment(date).format('MM-DD')),
      "Trade"
   ];
   
-  const tableData = stocks.map(stockData => {
-    let prices = dates.map(date => (<td>{stockData.eodPriceByDay[date]}</td>));
+  const tableData = stocks.data.map((stockData, i) => {
+    console.log("stockData", stockData);
+    let prices = dates.map((date, j) => (<td key={j}>{stockData.eodPriceByDay[date]}</td>));
     return (
-      <tr>
+      <tr key={i}>
         <td>{stockData.ticker}</td>
         {prices}
+        <td>
+          <Link to={`/trade`} onClick={
+            (e) => setCurrentTicker(e, stockData.ticker, stockData.eodPriceByDay[currentDate])}
+          > Trade </Link>
+        </td>
       </tr>
     );
   });
 
+  // console.log("tableData", tableData);
+
   return (
     <Table>
-          <thead>
-            <tr>
-              <ColumnHeadings 
-                headings= {colHeadings}
-              />
-            </tr>
-          </thead>
-          <tbody>
-            {tableData}
-          </tbody>
-        </Table>
+      <thead>
+        <tr>
+          <ColumnHeadings headings= {colHeadings} />
+        </tr>
+      </thead>
+      <tbody>
+        {tableData}
+      </tbody>
+    </Table>
     
   );
 };

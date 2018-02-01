@@ -1,44 +1,176 @@
 import {combineReducers} from 'redux';
 import * as StocksActions from './actions/StocksActions';
-import moment from 'moment';
+import * as DateActions from './actions/DateActions';
+import * as TradeActions from './actions/TradeActions';
+import * as PortfolioActions from './actions/PortfolioActions';
+const {DEFAULT_LATEST_DATE, INITIAL_CASH_ON_HAND} = require('./helpers/helpers');
 
 const initialState = {
-  date: ['2017-12-27','2017-12-20','2017-12-13'],
+  date: {
+    isChanging: false,
+    current: DEFAULT_LATEST_DATE,
+  },
   stocks: {
     isFetching: false,
-    data: {},
+    data: [],
     error: null
   },
+  trades: {
+    currentTicker: null,
+    currentPrice: 0
+  },
+  portfolio: {
+    cash: INITIAL_CASH_ON_HAND,
+    history: {
+      "GOOG": [
+        {
+          date: '2017-02-07',
+          price: 806.97,
+          quantity: 100
+        }
+      ]
+    }
+    
+  }
 };
 
-const stocks = (state = initialState, action) => {
+// {stockData, currentDate, currentTicker}
+
+const date = (state = initialState.date, action) => {
   switch (action.type) {
-    case StocksActions.GET_STOCKS_REQUEST: {
-      return {
-        ...state,
-        isFetching: true
-      };
-    }
-    case StocksActions.GET_STOCKS_SUCCESS: {
+  case DateActions.SET_SELECTED_DATE: {
+    console.log("reducer!!", action);
+    return Object.assign(
+      {},
+      ...state,
+      {
+        isChanging: false, 
+        current: action.data
+      }
+    );
+  }
+  case DateActions.NOW_SELECTING_DATE: {
+    return Object.assign(
+      {},
+      ...state,
+      {
+        isChanging: true, 
+        current: action.data
+      }
+    );
+  }
+  default: 
+    return state;
+  }
+}
+
+const stocks = (state = initialState.stocks, action) => {
+  switch (action.type) {
+    case StocksActions.GET_STOCKS_REQUEST: 
+      return Object.assign(
+        {}, 
+        state, 
+        {
+          isFetching: true,
+          data: state.data,
+          error: state.error
+        }
+      );
+    
+    case StocksActions.GET_STOCKS_SUCCESS: 
       // console.log("case StocksActions.GET_STOCKS_SUCCESS", action.data);
-      return {
-        ...state,
-        isFetching: false,
-        data: action.data
-      };
-    }
-    case StocksActions.GET_STOCKS_FAILURE: {
-      return {
-        ...state,
-        isFetching: false,
-        error: action.error
-      };
-    }
-    default: {
+      return Object.assign(
+        {}, 
+        state, 
+        {
+          isFetching: false,
+          data: action.data,
+          error: state.error
+        }
+      );
+    
+    case StocksActions.GET_STOCKS_FAILURE: 
+      return Object.assign(
+        {}, 
+        state, 
+        {
+          isFetching: true,
+          data: state.data,
+          error: action.error
+        }
+      );
+    
+    default: 
       return state;
-    }
+    
   }
 }; 
-const stocksApp = combineReducers({stocks});
+
+const trades = (state = initialState.trades, action) => {
+  console.log("trades Reducer", action.type, action);
+  switch (action.type) {
+    case TradeActions.SET_CURRENT_TICKER: 
+      return {
+        ...state, 
+        currentTicker: action.data.currentTicker,
+        currentPrice: action.data.currentPrice
+      };
+    
+    case TradeActions.UPDATE_CURRENT_TICKER: 
+      let {stockData, currentDate, currentTicker} = action.data;
+      return {
+        ...state, 
+        currentPrice: stockData.filter(stock => stock.ticker === currentTicker)[0]
+                               .eodPriceByDay[currentDate]
+      };
+      
+    default: 
+      return state;
+  }
+};
+
+const portfolio = (state = initialState.portfolio, action) => {
+  switch (action.type) {
+    case PortfolioActions.STORE_TRANSACTION_TO_PORTFOLIO: {
+      const {history} = state;
+      const {cash, transaction} = action.data;
+      console.log("PortfolioActions.STORE_TRANSACTION_TO_PORTFOLIO", action);
+      console.log("history", history);
+      const previousTransactions = history[transaction.ticker] || [];
+      return {
+        cash: cash,
+        history: {
+          ...history,
+          [transaction.ticker]: [
+            ...previousTransactions, 
+            {
+              date: transaction.date,
+              price: transaction.price,
+              quantity: transaction.quantity
+            }
+          ] 
+        }
+      };
+    }
+    default: 
+      return state;
+  }
+};
+
+const stocksApp = combineReducers({date, stocks, trades, portfolio});
 
 export default stocksApp;
+
+
+    // console.log("TradeActions currentPrice", stockData.filter(stock => stock.ticker === currentTicker)
+      //                         .eodPriceByDay[currentDate]);
+      
+      // let currentPrice = 0;
+      // for (let i = 0; i < stockData.length; i++) {
+      //   console.log(stockData[i].ticker);
+      //   if (stockData[i].ticker === currentTicker)
+      //     console.log(stockData[i].eodPriceByDay);
+      //     currentPrice = stockData[i].eodPriceByDay[currentDate];
+      // }
+      
+      // currentPrice
