@@ -34,8 +34,6 @@ const initialState = {
   }
 };
 
-// {stockData, currentDate, currentTicker}
-
 const date = (state = initialState.date, action) => {
   switch (action.type) {
   case DateActions.SET_SELECTED_DATE: {
@@ -62,7 +60,7 @@ const date = (state = initialState.date, action) => {
   default: 
     return state;
   }
-}
+};
 
 const stocks = (state = initialState.stocks, action) => {
   switch (action.type) {
@@ -161,16 +159,3 @@ const stocksApp = combineReducers({date, stocks, trades, portfolio});
 
 export default stocksApp;
 
-
-    // console.log("TradeActions currentPrice", stockData.filter(stock => stock.ticker === currentTicker)
-      //                         .eodPriceByDay[currentDate]);
-      
-      // let currentPrice = 0;
-      // for (let i = 0; i < stockData.length; i++) {
-      //   console.log(stockData[i].ticker);
-      //   if (stockData[i].ticker === currentTicker)
-      //     console.log(stockData[i].eodPriceByDay);
-      //     currentPrice = stockData[i].eodPriceByDay[currentDate];
-      // }
-      
-      // currentPrice
