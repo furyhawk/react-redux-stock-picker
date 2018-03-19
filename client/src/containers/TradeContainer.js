@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Form, FormGroup, Input, Label, Button, Alert} from 'reactstrap';
 import {setCurrentTicker} from '../actions/TradeActions';
 import {storeTransactionToPortfolio} from '../actions/PortfolioActions';
+import {LegendLabel, LegendInput, LegendValidatedInput} from '../components/TradeFormComponents';
 const moment = require('moment');
 
 const mapStateToProps = (state) => {
@@ -170,32 +171,37 @@ class TradeContainer extends Component {
         <h2>Trade</h2>
         <Form onSubmit={this.storeTransaction}>  
           <p>Choose a symbol to trade from the Stocks Panel</p>
-          <legend>Cash On Hand: </legend>
-          <Label>${cash}</Label>
-          <legend>Symbol: </legend>
-          <Label>{currentTicker ? `${currentTicker} @ $${currentPrice}` : ''}</Label>
-          <legend>Quantity: </legend>
-          <FormGroup>            
-            <Input onChange={this.onChangeQuantity} type="text" name="quantity" id="quantity" value={this.state.quantity} pattern="[0-9]*"  />
-          </FormGroup>
+          <LegendLabel
+            legendTxt={'Cash On Hand: '} 
+            labelTxt={`$${cash}`}
+          />
+          <LegendLabel
+            legendTxt={'Symbol: '} 
+            labelTxt={currentTicker && `${currentTicker} @ $${currentPrice}`}
+          />
+          <LegendInput legendTxt={'Quantity: '}>
+            <Input onChange={this.onChangeQuantity} type="text" name="quantity" id="quantity" value={quantity} pattern="[0-9]*"  />
+          </LegendInput>
           <FormGroup tag="fieldset">
-          <legend>Buy/Sell</legend>
-            <FormGroup check> {
-              quantity <= canBuy 
-                ? <Label><Input onChange={this.chooseBuy} type="radio" name="Buy" />{' '}Buy{`   Max: ${canBuy}`}</Label>  
-                : <div><Label><Input type="radio" name="Buy" disabled />{' '}<div className="text-muted">Buy</div></Label>
-                  {' '}<div className="text-danger"> You'll need more cash to buy this quantity on this date. Sell other shares from your portfolio to get cash.</div></div>
-              }
-            </FormGroup>
-            <FormGroup check> {
-              quantity <= canSell 
-                ? <Label><Input onChange={this.chooseSell} type="radio" name="Sell" />{' '}Sell{`   Max:${canSell}`}</Label>  
-                : <div><Label><Input type="radio" name="Sell" disabled />{' '}<div className="text-muted">Sell</div></Label>
-                  {' '}<div className="text-danger">You have no shares of this stock to sell on this date. Buy some at an earlier date.</div></div>
-              }
-            </FormGroup>
+            <LegendValidatedInput 
+              legendTxt={'Buy/Sell'} 
+              labelText={'Buy'}
+              formGroupCheck={true}
+              validation={quantity <= canBuy}
+              valueIfTrue={canBuy}
+              errorTextIfFalse={`You'll need more cash to buy this quantity on this date. Sell other shares from your portfolio to get cash.`}
+              onChange={this.chooseBuy}
+            />
+            <LegendValidatedInput 
+              labelText={'Sell'}
+              formGroupCheck={true}
+              validation={quantity <= canSell}
+              valueIfTrue={canSell}
+              errorTextIfFalse={`You have no shares of this stock to sell on this date. Buy some at an earlier date.`}
+              onChange={this.chooseSell}
+            />
           </FormGroup>
-          {okToStoreTransaction ? <Button type="submit" color="primary">Place Order</Button> : <div></div>}
+          {okToStoreTransaction && <Button type="submit" color="primary">Place Order</Button>}
         </Form>  
       </div>
     );
