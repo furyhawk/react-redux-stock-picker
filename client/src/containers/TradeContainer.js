@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Form, FormGroup, Input, Label, Button, Alert} from 'reactstrap';
 import {setCurrentTicker} from '../actions/TradeActions';
 import {storeTransactionToPortfolio} from '../actions/PortfolioActions';
 import {LegendLabel, LegendInput, LegendValidatedInput} from '../components/TradeFormComponents';
+import Trade from '../components/Trade';
 const moment = require('moment');
 
 const mapStateToProps = (state) => {
@@ -161,51 +161,19 @@ class TradeContainer extends Component {
   
   render(){
     console.log("props & state TradeContainer", this.props, this.state);
-    let {currentTicker, currentPrice, cash} = this.props;
-    let {quantity, canBuy, canSell, alert, okToStoreTransaction} = this.state;
-    
-    console.log("canBuy in render", canBuy);
+    console.log("canBuy in render", this.state.canBuy);
     return  (
-      <div className="Trade">
-        {alert.send ? <Alert color={alert.color}>{alert.message}</Alert> : <div></div>}
-        <h2>Trade</h2>
-        <Form onSubmit={this.storeTransaction}>  
-          <p>Choose a symbol to trade from the Stocks Panel</p>
-          <LegendLabel
-            legendTxt={'Cash On Hand: '} 
-            labelTxt={`$${cash}`}
-          />
-          <LegendLabel
-            legendTxt={'Symbol: '} 
-            labelTxt={currentTicker && `${currentTicker} @ $${currentPrice}`}
-          />
-          <LegendInput legendTxt={'Quantity: '}>
-            <Input onChange={this.onChangeQuantity} type="text" name="quantity" id="quantity" value={quantity} pattern="[0-9]*"  />
-          </LegendInput>
-          <FormGroup tag="fieldset">
-            <LegendValidatedInput 
-              legendTxt={'Buy/Sell'} 
-              labelText={'Buy'}
-              formGroupCheck={true}
-              validation={quantity <= canBuy}
-              valueIfTrue={canBuy}
-              errorTextIfFalse={`You'll need more cash to buy this quantity on this date. Sell other shares from your portfolio to get cash.`}
-              onChange={this.chooseBuy}
-            />
-            <LegendValidatedInput 
-              labelText={'Sell'}
-              formGroupCheck={true}
-              validation={quantity <= canSell}
-              valueIfTrue={canSell}
-              errorTextIfFalse={`You have no shares of this stock to sell on this date. Buy some at an earlier date.`}
-              onChange={this.chooseSell}
-            />
-          </FormGroup>
-          {okToStoreTransaction && <Button type="submit" color="primary">Place Order</Button>}
-        </Form>  
-      </div>
+      <Trade 
+        props={this.props}
+        state={this.state}
+        storeTransaction={this.storeTransaction}
+        onChangeQuantity={this.onChangeQuantity}
+        chooseBuy={this.chooseBuy}
+        chooseSell={this.chooseSell}
+      />
     );
   }
+
 }
 
 export default connect(
