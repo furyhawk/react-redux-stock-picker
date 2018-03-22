@@ -32,10 +32,10 @@ class App extends Component {
               <NavBarContainer color="success"/>
             </div>
           </div>
-          <div className="row">
+          <div className="row my-3">
             <div className="col-4">
               <div className="col-12 show-border">
-                <StocksTableContainer className={"my-1"}/>
+                <StocksTableContainer/>
               </div>
             </div>
             <div className="col-8">
@@ -45,7 +45,7 @@ class App extends Component {
                   <DateSliderContainer />
                   </div>
                 </div>
-                <div className="row show-border">
+                <div className="row show-border my-3">
                   <div className="col">
                       <div>
                         <SelectAction  />
