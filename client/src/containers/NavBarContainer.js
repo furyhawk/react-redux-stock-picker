@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import DateSliderContainer from './DateSliderContainer';
+
 
 export default class Example extends Component {
   constructor(props) {
@@ -20,8 +22,10 @@ export default class Example extends Component {
     return (
       <div>
         <Navbar color={this.props.color} light>
-          <NavbarBrand href="/" className="mr-auto">Time Traveling Stock Picker</NavbarBrand>
-          
+          <NavbarBrand href="/" className="mr-auto">
+            <h3>Time Traveling Stock Picker</h3>
+          </NavbarBrand>
+          <DateSliderContainer />
         </Navbar>
       </div>
     );

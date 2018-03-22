@@ -42,11 +42,6 @@ class App extends Component {
               <div className="col-12">
                 <div className="row show-border">
                   <div className="col">
-                    <DateSliderContainer />    
-                  </div>
-                </div>
-                <div className="row show-border">
-                  <div className="col">
                       <div>
                         <SelectAction  />
                         <Switch>
