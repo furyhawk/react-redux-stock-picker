@@ -11,6 +11,7 @@ import StocksTableContainer from './containers/StocksTableContainer';
 import TradeContainer from './containers/TradeContainer';
 import TransactionsContainer from './containers/TransactionsContainer';
 import PortfolioContainer from './containers/PortfolioContainer';
+import NavBarContainer from './containers/NavBarContainer';
 import SelectAction from './components/SelectAction';
 // import {navs} from './helpers/helpers';
 
@@ -26,33 +27,38 @@ class App extends Component {
     return (
       <Router>
         <div className="App container-fluid">
-          <div className="row show-border">
-            <div className="col-4">
-            <div className="col-12 show-border">
-              <StocksTableContainer />
-            </div>
-            </div>
-            <div className="col-8">
-            <div className="col-12">
-              <div className="row show-border">
-                <div className="col">
-                  <DateSliderContainer />    
-                </div>
-              </div>
-              <div className="row show-border">
-                <div className="col">
-                    <div>
-                      <SelectAction  />
-                      <Switch>
-                        <Route path='/trade/:ticker?' component={TradeContainer} />
-                        <Route path='/transactions' component={TransactionsContainer} />
-                        <Route path='/portfolio' component={PortfolioContainer} />
-                      </Switch>
-                    </div>
-                </div>
-              </div>
+          <div className="row">
+            <div className="col-12 ">
+              <NavBarContainer color="success"/>
             </div>
           </div>
+          <div className="row">
+            <div className="col-4">
+              <div className="col-12 show-border">
+                <StocksTableContainer />
+              </div>
+            </div>
+            <div className="col-8">
+              <div className="col-12">
+                <div className="row show-border">
+                  <div className="col">
+                    <DateSliderContainer />    
+                  </div>
+                </div>
+                <div className="row show-border">
+                  <div className="col">
+                      <div>
+                        <SelectAction  />
+                        <Switch>
+                          <Route path='/trade/:ticker?' component={TradeContainer} />
+                          <Route path='/transactions' component={TransactionsContainer} />
+                          <Route path='/portfolio' component={PortfolioContainer} />
+                        </Switch>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </Router>
