@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-rangeslider/lib/index.css';
 import './index.css';
+import './flatly-bootstrap-theme.css';
 import App from './App';
 import StocksApp from './reducers';
 
