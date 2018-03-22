@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Slider from 'react-rangeslider';
+import { Badge } from 'reactstrap';
 import {setSelectedDate} from '../actions/DateActions';
 
 const {DEFAULT_LATEST_DATE, dateSliderArray} = require('../helpers/helpers');
@@ -52,7 +53,7 @@ class DateSliderContainer extends Component {
           onChange={this.onChange}
           onChangeComplete={this.onChangeComplete}
         />
-        <div>Selected Date: {current}</div>
+        <h3 className="float-right mr-3">Date: <Badge color="secondary">{current}</Badge></h3>
       </div>
     );
   }
