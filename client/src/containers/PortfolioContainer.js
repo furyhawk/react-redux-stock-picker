@@ -10,7 +10,7 @@ class PortfolioContainer extends Component {
     return (
       <div>
         <h4>Cash On Hand:  </h4>
-        <Table>
+        <Table size='sm'>
           <thead>
             <tr>
               <ColumnHeadings 
