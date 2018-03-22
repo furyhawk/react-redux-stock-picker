@@ -20,14 +20,14 @@ const Trade = ({props, state, storeTransaction, onChangeQuantity, chooseBuy, cho
         legendTxt={'Symbol: '} 
         labelTxt={currentTicker && `${currentTicker} @ $${currentPrice}`}
       />
-      <LegendInput legendTxt={'Quantity: '}>
+      <LegendInput legendTxt={'Quantity: '} >
         <Input onChange={onChangeQuantity} type="text" name="quantity" id="quantity" value={quantity} pattern="[0-9]*"  />
       </LegendInput>
-      <FormGroup tag="fieldset">
+      <FormGroup tag="fieldset" >
         <LegendValidatedInput 
           legendTxt={'Buy/Sell'} 
           labelText={'Buy'}
-          formGroupCheck={true}
+          formGroupCheck={false}
           validation={quantity <= canBuy}
           valueIfTrue={canBuy}
           errorTextIfFalse={`You'll need more cash to buy this quantity on this date. Sell other shares from your portfolio to get cash.`}
@@ -35,7 +35,7 @@ const Trade = ({props, state, storeTransaction, onChangeQuantity, chooseBuy, cho
         />
         <LegendValidatedInput 
           labelText={'Sell'}
-          formGroupCheck={true}
+          formGroupCheck={false}
           validation={quantity <= canSell}
           valueIfTrue={canSell}
           errorTextIfFalse={`You have no shares of this stock to sell on this date. Buy some at an earlier date.`}
