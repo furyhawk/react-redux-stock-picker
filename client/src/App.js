@@ -35,11 +35,16 @@ class App extends Component {
           <div className="row">
             <div className="col-4">
               <div className="col-12 show-border">
-                <StocksTableContainer />
+                <StocksTableContainer className={"my-1"}/>
               </div>
             </div>
             <div className="col-8">
               <div className="col-12">
+                <div className="row show-border">
+                  <div className="col">
+                  <DateSliderContainer />
+                  </div>
+                </div>
                 <div className="row show-border">
                   <div className="col">
                       <div>

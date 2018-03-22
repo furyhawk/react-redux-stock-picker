@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import DateSliderContainer from './DateSliderContainer';
 
 
 export default class Example extends Component {
@@ -25,7 +24,7 @@ export default class Example extends Component {
           <NavbarBrand href="/" className="mr-auto">
             <h1>Time Traveling Stock Picker</h1>
           </NavbarBrand>
-          <DateSliderContainer />
+          
         </Navbar>
       </div>
     );
