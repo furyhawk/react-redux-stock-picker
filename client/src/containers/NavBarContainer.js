@@ -23,7 +23,7 @@ export default class Example extends Component {
       <div>
         <Navbar color={this.props.color} light>
           <NavbarBrand href="/" className="mr-auto">
-            <h3>Time Traveling Stock Picker</h3>
+            <h1>Time Traveling Stock Picker</h1>
           </NavbarBrand>
           <DateSliderContainer />
         </Navbar>

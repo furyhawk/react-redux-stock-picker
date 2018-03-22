@@ -97,7 +97,7 @@
    margin-bottom: 0.5rem;
  }
 
- h3 {
+  h1, h2 {
    font-family: "Cabin", sans-serif
  }
  
@@ -387,27 +387,27 @@
  }
  
  h1, .h1 {
-   font-size: 3rem;
- }
- 
- h2, .h2 {
-   font-size: 2.5rem;
- }
- 
- h3, .h3 {
    font-size: 2rem;
  }
  
+ h2, .h2 {
+   font-size: 1.4rem;
+ }
+ 
+ h3, .h3 {
+   font-size: 1.1rem;
+ }
+ 
  h4, .h4 {
-   font-size: 1.3rem;
+   font-size: .9rem;
  }
  
  h5, .h5 {
-   font-size: 1.171875rem;
+   font-size: .85rem;
  }
  
  h6, .h6 {
-   font-size: 0.9375rem;
+   font-size: 0.8rem;
  }
  
  .lead {

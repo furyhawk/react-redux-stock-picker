@@ -12,6 +12,7 @@ class TransactionsContainer extends Component {
   render() {
     return (
       <div>
+        <h2>Transactions</h2>
         <Filter />
         <Table>
           <thead>
