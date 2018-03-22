@@ -13,13 +13,7 @@ import TransactionsContainer from './containers/TransactionsContainer';
 import PortfolioContainer from './containers/PortfolioContainer';
 import NavBarContainer from './containers/NavBarContainer';
 import SelectAction from './components/SelectAction';
-// import {navs} from './helpers/helpers';
 
-// const selectActionNavs = Object.keys(navs).map((navKey, i) => (
-//   <NavItem key={i}>
-//     <NavLink tag={RRNavLink} to={navs[navKey]}>{navKey}}</NavLink>
-//   </NavItem>
-// ));
 
 class App extends Component {
 
@@ -47,14 +41,14 @@ class App extends Component {
                 </div>
                 <div className="row show-border my-3">
                   <div className="col ">
-                      <div>
-                        <SelectAction  />
-                        <Switch>
-                          <Route path='/trade/:ticker?' component={TradeContainer} />
-                          <Route path='/transactions' component={TransactionsContainer} />
-                          <Route path='/portfolio' component={PortfolioContainer} />
-                        </Switch>
-                      </div>
+                    <div>
+                      <SelectAction  />
+                      <Switch>
+                        <Route path='/trade/:ticker?' component={TradeContainer} />
+                        <Route path='/transactions' component={TransactionsContainer} />
+                        <Route path='/portfolio' component={PortfolioContainer} />
+                      </Switch>
+                    </div>
                   </div>
                 </div>
               </div>
