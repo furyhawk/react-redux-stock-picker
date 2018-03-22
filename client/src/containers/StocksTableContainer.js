@@ -45,21 +45,7 @@ class StocksTableContainer extends Component {
       getStocks(stocksDefaults, createDatesList(current), current, currentTicker);
     }
   }
-  
-  // componentDidUpdate(prevProps) {
-  //   let {setCurrentTicker, currentTicker, stocks, date} = this.props;
-  //   if (currentTicker && date !== prevProps.date) {
-  //     console.log(stocks);
-  //     let currentPrice = stocks.data
-  //                             .filter(
-  //                               stockData => 
-  //                               stockData.ticker === 
-  //                               currentTicker)
-  //                             .eodPriceByDay[date];
-  //     setCurrentTicker(null, currentTicker, currentPrice);
-  //   }
-  // }
-  
+    
   render() {
     const {setCurrentTicker, stocks, date: {current}} = this.props;
     console.log("rendering StocksTableContainer", stocks);
@@ -81,8 +67,3 @@ export default connect(
   mapStateToProps, mapDispatchToProps
 )(StocksTableContainer);
 
-
-    // console.log("componentDidMount","calling getStocks");
-    // this.props.getStocks(stocksDefaults, datesDefaults);
-    // console.log("this.props.date.current", this.props.date.current);
-    // console.log("createDatesList(this.props.date.current)", createDatesList(this.props.date.current));
