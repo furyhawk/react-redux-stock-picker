@@ -8,7 +8,7 @@ const Trade = ({props, state, storeTransaction, onChangeQuantity, chooseBuy, cho
   return (
     <div className="Trade">
     {alert.send ? <Alert color={alert.color}>{alert.message}</Alert> : <div></div>}
-    <h2>Trade</h2>
+    <h2 className={"my-1"}>Trade</h2>
     <Form onSubmit={storeTransaction}>  
       <p>Choose a symbol to trade from the Stocks Panel</p>
       <LegendLabel
