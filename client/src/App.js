@@ -27,10 +27,10 @@ class App extends Component {
       <Router>
         <div className="App container-fluid">
           <div className="row show-border">
-            <div className="col show-border">
+            <div className="col-5 show-border">
               <StocksTableContainer />
             </div>
-            <div className="col">
+            <div className="col-7">
               <div className="row show-border">
                 <div className="col">
                   <DateSliderContainer />    
