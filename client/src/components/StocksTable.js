@@ -32,7 +32,7 @@ const StocksTable = ({stocks, dates, setCurrentTicker, currentDate}) => {
   return (
     <Table>
       <thead>
-        <tr><h2 className={"my-1"}>Stocks</h2></tr>
+        <tr><h2 className="my-1">Stocks</h2></tr>
         <tr>
           <ColumnHeadings headings= {colHeadings} />
         </tr>

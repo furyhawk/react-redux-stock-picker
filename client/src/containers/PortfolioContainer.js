@@ -9,7 +9,7 @@ class PortfolioContainer extends Component {
   render(){
     return (
       <div>
-        <h2 className={"my-1"}>Portfolio</h2>
+        <h2 className="my-1">Portfolio</h2>
         <Table size='sm'>
           <thead>
             <tr>

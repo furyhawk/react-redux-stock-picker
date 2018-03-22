@@ -19,7 +19,7 @@ class SelectAction extends Component {
   
   render(){
     return (
-      <Dropdown className={"float-right my-1"} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+      <Dropdown className="float-right" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
         <DropdownToggle caret>
           Choose Your View
         </DropdownToggle>

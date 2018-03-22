@@ -12,7 +12,7 @@ class TransactionsContainer extends Component {
   render() {
     return (
       <div>
-        <h2 className={"my-1"}>Transactions</h2>
+        <h2 className="my-1">Transactions</h2>
         <Filter />
         <Table>
           <thead>
