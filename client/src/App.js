@@ -32,7 +32,7 @@ class App extends Component {
               <NavBarContainer color="success"/>
             </div>
           </div>
-          <div className="row my-3">
+          <div className="row my-3 full-height">
             <div className="col-4">
               <div className="col-12 show-border">
                 <StocksTableContainer/>
@@ -46,7 +46,7 @@ class App extends Component {
                   </div>
                 </div>
                 <div className="row show-border my-3">
-                  <div className="col">
+                  <div className="col ">
                       <div>
                         <SelectAction  />
                         <Switch>

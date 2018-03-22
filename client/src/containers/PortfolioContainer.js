@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Table} from 'reactstrap';
 import ColumnHeadings from '../components/ColumnHeadings';
+import ViewHeader from '../components/ViewHeader';
 
 
 class PortfolioContainer extends Component {
@@ -9,7 +10,7 @@ class PortfolioContainer extends Component {
   render(){
     return (
       <div>
-        <h2 className="my-3">Portfolio</h2>
+        <ViewHeader heading={'Portfolio'} />
         <Table size='sm'>
           <thead>
             <tr>

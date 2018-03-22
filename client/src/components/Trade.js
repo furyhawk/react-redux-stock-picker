@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Form, FormGroup, Input, Label, Button, Alert} from 'reactstrap';
-import {LegendLabel, LegendInput, LegendValidatedInput} from '../components/TradeFormComponents';
+import {LegendLabel, LegendInput, LegendValidatedInput} from './TradeFormComponents';
+import ViewHeader from '../components/ViewHeader';
 
 const Trade = ({props, state, storeTransaction, onChangeQuantity, chooseBuy, chooseSell}) => {
   let {currentTicker, currentPrice, cash} = props;
@@ -8,7 +9,7 @@ const Trade = ({props, state, storeTransaction, onChangeQuantity, chooseBuy, cho
   return (
     <div className="Trade">
     {alert.send ? <Alert color={alert.color}>{alert.message}</Alert> : <div></div>}
-    <h2 className="my-3">Trade</h2>
+    <ViewHeader heading={'Trade'} />
     <Form onSubmit={storeTransaction}>  
       <p>Choose a symbol to trade from the Stocks Panel</p>
       <LegendLabel

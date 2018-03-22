@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Table} from 'reactstrap';
 import ColumnHeadings from '../components/ColumnHeadings';
+import ViewHeader from '../components/ViewHeader';
 
 
 const Filter = () => {
@@ -12,7 +13,7 @@ class TransactionsContainer extends Component {
   render() {
     return (
       <div>
-        <h2 className="mt-3">Transactions</h2>
+        <ViewHeader heading={'Transactions'} />
         <Filter />
         <Table>
           <thead>

@@ -1,7 +1,8 @@
 import React from 'react';
 import {Table} from 'reactstrap';
 import {Link} from 'react-router-dom';
-import ColumnHeadings from '../components/ColumnHeadings';
+import ColumnHeadings from './ColumnHeadings';
+import ViewHeader from './ViewHeader';
 import moment from 'moment';
 
 const StocksTable = ({stocks, dates, setCurrentTicker, currentDate}) => {
@@ -30,17 +31,19 @@ const StocksTable = ({stocks, dates, setCurrentTicker, currentDate}) => {
 
 
   return (
-    <Table>
-      <thead>
-        <tr><h2 className="my-3">Stocks</h2></tr>
-        <tr>
-          <ColumnHeadings headings= {colHeadings} />
-        </tr>
-      </thead>
-      <tbody>
-        {tableData}
-      </tbody>
-    </Table>
+    <div>
+      <ViewHeader heading={'Stocks'} />
+      <Table>
+        <thead>
+          <tr>
+            <ColumnHeadings headings= {colHeadings} />
+          </tr>
+        </thead>
+        <tbody>
+          {tableData}
+        </tbody>
+      </Table>
+    </div>
     
   );
 };
