@@ -26,12 +26,12 @@ class App extends Component {
             </div>
           </div>
           <div className="row my-3 full-height">
-            <div className="col-4">
+            <div className="col-xl-4 col-lg-12">
               <div className="col-12 show-border">
                 <StocksTableContainer/>
               </div>
             </div>
-            <div className="col-8">
+            <div className="col-xl-8 col-lg-12">
               <div className="col-12">
                 <div className="row show-border">
                   <div className="col">
@@ -39,7 +39,7 @@ class App extends Component {
                   </div>
                 </div>
                 <div className="row show-border my-3">
-                  <div className="col ">
+                  <div className="col-12 full-height">
                     <div>
                       <SelectAction  />
                       <Switch>
