@@ -1,20 +1,48 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {Table} from 'reactstrap';
 import ColumnHeadings from '../components/ColumnHeadings';
 import ViewHeader from '../components/ViewHeader';
+const moment = require('moment');
 
 
-const Filter = () => {
-  return null;
+const mapStateToProps = (state) => {
+  return {
+    history: state.portfolio.history
+  };
 };
-
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
 
 class TransactionsContainer extends Component {
   render() {
+    const {history} = this.props;
+    let transactionsMap = Object.keys(history)
+    .reduce((transactions, ticker) => {
+      return [
+        ...transactions,
+        ...history[ticker]
+      ];
+    }, [])
+    .sort((transactionA, transactionB) => {
+      return moment(transactionA.date).isBefore(transactionB.date)
+    })
+    .map(transaction => {
+      return (
+        <tr key={transaction.date}>
+          <td>{transaction.date}</td>
+          <td>{transaction.ticker}</td>
+          <td>{(transaction.quantity > 0) ? "Buy" : "Sell"}</td>
+          <td>{transaction.quantity}</td>
+          <td>{transaction.price}</td>
+        </tr>
+      );
+    })
     return (
       <div>
         <ViewHeader heading={'Transactions'} />
-        <Filter />
+        
         <Table>
           <thead>
             <tr>
@@ -24,27 +52,7 @@ class TransactionsContainer extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td>Thornton</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <td>the Bird</td>
-            </tr>
+            {transactionsMap}
           </tbody>
         </Table>
       </div>
@@ -53,4 +61,4 @@ class TransactionsContainer extends Component {
   
 }
 
-export default TransactionsContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionsContainer);

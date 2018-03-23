@@ -3,7 +3,7 @@ import * as StocksActions from './actions/StocksActions';
 import * as DateActions from './actions/DateActions';
 import * as TradeActions from './actions/TradeActions';
 import * as PortfolioActions from './actions/PortfolioActions';
-const {DEFAULT_LATEST_DATE, INITIAL_CASH_ON_HAND} = require('./helpers/helpers');
+import {DEFAULT_LATEST_DATE, INITIAL_CASH_ON_HAND} from './helpers/helpers';
 
 const initialState = {
   date: {
@@ -26,7 +26,8 @@ const initialState = {
         {
           date: '2017-02-07',
           price: 806.97,
-          quantity: 100
+          quantity: 100, 
+          ticker: "GOOG",
         }
       ]
     }
@@ -118,8 +119,9 @@ const trades = (state = initialState.trades, action) => {
       let {stockData, currentDate, currentTicker} = action.data;
       return {
         ...state, 
-        currentPrice: stockData.filter(stock => stock.ticker === currentTicker)[0]
-                               .eodPriceByDay[currentDate]
+        currentPrice: stockData
+          .filter(stock => stock.ticker === currentTicker)[0]
+          .eodPriceByDay[currentDate]
       };
       
     default: 
@@ -144,7 +146,8 @@ const portfolio = (state = initialState.portfolio, action) => {
             {
               date: transaction.date,
               price: transaction.price,
-              quantity: transaction.quantity
+              quantity: transaction.quantity,
+              ticker: transaction.ticker,
             }
           ] 
         }
