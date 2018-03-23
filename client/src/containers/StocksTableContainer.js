@@ -4,7 +4,7 @@ import StocksTable from '../components/StocksTable';
 import {getStocks} from '../actions/StocksActions';
 import {setCurrentTicker} from '../actions/TradeActions';
 
-const {stocksDefaults, createDatesList, DEFAULT_LATEST_DATE} = require('../helpers/helpers');
+const {stocksDefaults, createDatesList} = require('../helpers/helpers');
 
 const Filter = () => {
   return null;
@@ -40,7 +40,6 @@ class StocksTableContainer extends Component {
   
   componentWillReceiveProps(nextProps) {
     let {currentTicker, getStocks, date: {current}} = nextProps;
-    console.log("componentWillReceiveProps", "this.props.date.current", this.props.date.current, "nextProps.date.current", nextProps.date.current);
     if (this.props.date.current !== nextProps.date.current) {
       getStocks(stocksDefaults, createDatesList(current), current, currentTicker);
     }

@@ -1,7 +1,7 @@
 /* global fetch */
 import getDataPromise from '../temp-data/tempDataWrapper';
 import {updateCurrentTicker} from './TradeActions';
-const {datesDefaults, stocksDefaults, createDatesList, DEFAULT_LATEST_DATE} = require('../helpers/helpers');
+const {stocksDefaults, createDatesList, DEFAULT_LATEST_DATE} = require('../helpers/helpers');
 export const GET_STOCKS_REQUEST="GET_STOCKS_REQUEST";
 export const GET_STOCKS_FAILURE="GET_STOCKS_FAILURE";
 export const GET_STOCKS_SUCCESS="GET_STOCKS_SUCCESS";

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Form, FormGroup, Input, Label, Button, Alert} from 'reactstrap';
+import React from 'react';
+import {Form, FormGroup, Input, Button, Alert} from 'reactstrap';
 import {LegendLabel, LegendInput, LegendValidatedInput} from './TradeFormComponents';
 import ViewHeader from '../components/ViewHeader';
 

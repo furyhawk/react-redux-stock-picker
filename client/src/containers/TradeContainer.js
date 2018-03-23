@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {setCurrentTicker} from '../actions/TradeActions';
 import {storeTransactionToPortfolio} from '../actions/PortfolioActions';
-import {LegendLabel, LegendInput, LegendValidatedInput} from '../components/TradeFormComponents';
 import Trade from '../components/Trade';
 const moment = require('moment');
 
@@ -75,22 +74,18 @@ class TradeContainer extends Component {
   onChangeQuantity = (e) => {
     if (!isNaN(e.target.value)){
       this.setState({quantity: +e.target.value}, this.checkTransaction);
-      // this.checkTransaction();
     }
   }
   chooseBuy = () => {
     this.setState({buyOrSell: 'buy'}, this.checkTransaction);
-    // this.checkTransaction();
   }
   chooseSell = () => {
     this.setState({buyOrSell: 'sell'}, this.checkTransaction);
-    // this.checkTransaction();
   }
-  // ----------
   
+  // ----------
   // FORM VALIDATIONS
   // ----------
-  
   checkCanBuyOrSell() {
     let {date, currentTicker, currentPrice, cash, history,} = this.props;
     let canBuy = 0;

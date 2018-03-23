@@ -45,7 +45,7 @@ const dateSliderArray = createWeekdayArray(DEFAULT_EARLIEST_DATE, DEFAULT_LATEST
 // STOCKS
 // ----------
 const stocksDefaults =  [
-  "AAPL","AMZN","DIS","GOOG","INTC","LUV","MRK","MSFT","NFLX","NKE","NVDA","QCOM","SBUX","TSLA","VZ"
+  "AAPL","AMZN","DIS","GOOG","MSFT","NFLX","NKE","NVDA","QCOM","TSLA"
 ];
 
 module.exports = {

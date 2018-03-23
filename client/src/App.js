@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import {
-  NavLink as RRNavLink,
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from 'react-router-dom';
-import {NavItem, NavLink} from 'reactstrap';
 import DateSliderContainer from './containers/DateSliderContainer';
 import StocksTableContainer from './containers/StocksTableContainer';
 import TradeContainer from './containers/TradeContainer';
@@ -45,7 +43,7 @@ class App extends Component {
                     <div>
                       <SelectAction  />
                       <Switch>
-                        <Route exact path="/" render={() => (<Redirect to="/portfolio"/>)} />
+                        <Route exact path="/" render={() => (<Redirect to="/portfolio" />)} />
                         <Route path='/trade/:ticker?' component={TradeContainer} />
                         <Route path='/transactions' component={TransactionsContainer} />
                         <Route path='/portfolio' component={PortfolioContainer} />
