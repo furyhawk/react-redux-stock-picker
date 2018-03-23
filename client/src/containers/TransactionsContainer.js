@@ -30,7 +30,7 @@ class TransactionsContainer extends Component {
     })
     .map(transaction => {
       return (
-        <tr key={transaction.date}>
+        <tr key={`${transaction.ticker}${transaction.quantity}${transaction.date}`}>
           <td>{transaction.date}</td>
           <td>{transaction.ticker}</td>
           <td>{(transaction.quantity > 0) ? "Buy" : "Sell"}</td>
