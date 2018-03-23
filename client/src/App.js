@@ -43,7 +43,7 @@ class App extends Component {
                     <div>
                       <SelectAction  />
                       <Switch>
-                        <Route exact path="/" render={() => (<Redirect to="/portfolio" />)} />
+                        <Route exact path="/" render={() => (<Redirect to="/transactions" />)} />
                         <Route path='/trade/:ticker?' component={TradeContainer} />
                         <Route path='/transactions' component={TransactionsContainer} />
                         <Route path='/portfolio' component={PortfolioContainer} />
