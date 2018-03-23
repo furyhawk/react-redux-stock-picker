@@ -1,6 +1,6 @@
 import React from 'react';
 import {Form, FormGroup, Input, Button, Alert} from 'reactstrap';
-import {LegendLabel, LegendInput, LegendValidatedInput} from './TradeFormComponents';
+import {LegendLabel, LegendWrapper, ValidatedRadioInput} from './TradeFormComponents';
 import ViewHeader from '../components/ViewHeader';
 
 const Trade = ({props, state, storeTransaction, onChangeQuantity, chooseBuy, chooseSell}) => {
@@ -20,29 +20,31 @@ const Trade = ({props, state, storeTransaction, onChangeQuantity, chooseBuy, cho
         legendTxt={'Symbol: '} 
         labelTxt={currentTicker && `${currentTicker} @ $${currentPrice}`}
       />
-      <LegendInput legendTxt={'Quantity: '} >
+      <LegendWrapper legendTxt={'Quantity: '} >
         <Input onChange={onChangeQuantity} type="text" name="quantity" id="quantity" value={quantity} pattern="[0-9]*"  />
-      </LegendInput>
+      </LegendWrapper>
       <FormGroup tag="fieldset" >
-        <LegendValidatedInput 
-          legendTxt={'Buy/Sell'} 
-          labelText={'Buy'}
-          formGroupCheck={false}
-          validation={quantity <= canBuy}
-          valueIfTrue={canBuy}
-          errorTextIfFalse={`You'll need more cash to buy this quantity on this date. Sell other shares from your portfolio to get cash.`}
-          onChange={chooseBuy}
-        />
-        <LegendValidatedInput 
-          labelText={'Sell'}
-          formGroupCheck={false}
-          validation={quantity <= canSell}
-          valueIfTrue={canSell}
-          errorTextIfFalse={`You have no shares of this stock to sell on this date. Buy some at an earlier date.`}
-          onChange={chooseSell}
-        />
+        <LegendWrapper legendTxt={'Buy/Sell'} >
+          <ValidatedRadioInput 
+            labelText={"Buy"}
+            inputType={"radio"}
+            formGroupCheck={false}
+            validation={quantity <= canBuy}
+            valueIfPass={canBuy}
+            errorTextIfFail={`You'll need more cash to buy this quantity on this date. Sell other shares from your portfolio to get cash.`}
+            onChange={chooseBuy}
+          />
+          <ValidatedRadioInput 
+            labelText={"Sell"}
+            formGroupCheck={false}
+            validation={quantity <= canSell}
+            valueIfPass={canSell}
+            errorTextIfFail={`You have no shares of this stock to sell on this date. Buy some at an earlier date.`}
+            onChange={chooseSell}
+          />
+        </LegendWrapper>
       </FormGroup>
-      {okToStoreTransaction && <Button type="submit" color="primary">Place Order</Button>}
+      {okToStoreTransaction && <Button className="mb-3" type="submit" color="success">Place Order</Button>}
     </Form>  
   </div>
   );

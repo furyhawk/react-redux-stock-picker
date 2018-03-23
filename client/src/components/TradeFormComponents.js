@@ -10,7 +10,7 @@ export const LegendLabel = ({legendTxt, labelTxt}) => {
   );
 };
 
-export const LegendInput = ({legendTxt, formGroupCheck, children}) => {
+export const LegendWrapper = ({legendTxt, formGroupCheck, children}) => {
   return (
     <div>
       <legend>{legendTxt}</legend>
@@ -22,23 +22,20 @@ export const LegendInput = ({legendTxt, formGroupCheck, children}) => {
   );
 };
 
-export const LegendValidatedInput = (
-  {legendTxt, labelText, formGroupCheck, validation, valueIfTrue, errorTextIfFalse, onChange}
+export const ValidatedRadioInput = (
+  {labelText, formGroupCheck, validation, valueIfPass, errorTextIfFail, onChange}
 ) => {
-  const InputIfTrue = <Input className="ml-1" onChange={onChange} type="radio" name={labelText} />;
-  const InputIfFalse = <Input className="ml-1" type="radio" name={labelText} disabled />;
   return (
-    <FormGroup >
-      <legend>{legendTxt}</legend>
+    <FormGroup check={formGroupCheck} >
       <Label>
-        {validation ? InputIfTrue : InputIfFalse}{'  '}
+        <Input className="ml-1" onChange={onChange} type="radio" name={labelText} disabled={!validation} />{'  '}
         {
           validation
-          ? <div className="ml-4">{`${labelText}    Max:${valueIfTrue}`}</div>
+          ? <div className="ml-4">{`${labelText}    Max:${valueIfPass}`}</div>
           : <div className="text-muted ml-4">{labelText}</div>
         }
       </Label>{'  '}
-      {!validation && <div className="text-danger">{errorTextIfFalse}</div>}
+      {!validation && <div className="text-danger">{errorTextIfFail}</div>}
     </FormGroup>
   );
 };
