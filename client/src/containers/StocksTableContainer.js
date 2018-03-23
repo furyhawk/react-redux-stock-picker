@@ -3,8 +3,7 @@ import {connect} from 'react-redux';
 import StocksTable from '../components/StocksTable';
 import {getStocks} from '../actions/StocksActions';
 import {setCurrentTicker} from '../actions/TradeActions';
-
-const {stocksDefaults, createDatesList} = require('../helpers/helpers');
+import {stocksDefaults, createDatesList} from '../helpers/helpers';
 
 const Filter = () => {
   return null;
