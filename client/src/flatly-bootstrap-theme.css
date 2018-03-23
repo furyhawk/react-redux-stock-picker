@@ -3343,7 +3343,7 @@
  .dropdown-item:hover, .dropdown-item:focus {
    color: #fff;
    text-decoration: none;
-   background-color: #2C3E50;
+   background-color: rgba(44, 62, 80, 0.5);
  }
  
  .dropdown-item.active, .dropdown-item:active {
