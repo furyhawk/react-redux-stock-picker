@@ -27,7 +27,7 @@ const Trade = ({props, state, storeTransaction, onChangeQuantity, chooseBuy, cho
         <LegendWrapper legendTxt={'Buy/Sell'} >
           <ValidatedRadioInput 
             labelText={"Buy"}
-            inputType={"radio"}
+            name={'buy-sell'}
             formGroupCheck={false}
             validation={quantity <= canBuy}
             valueIfPass={canBuy}
@@ -36,6 +36,7 @@ const Trade = ({props, state, storeTransaction, onChangeQuantity, chooseBuy, cho
           />
           <ValidatedRadioInput 
             labelText={"Sell"}
+            name={'buy-sell'}
             formGroupCheck={false}
             validation={quantity <= canSell}
             valueIfPass={canSell}

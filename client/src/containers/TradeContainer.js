@@ -47,7 +47,10 @@ class TradeContainer extends Component {
     this.checkTransaction();
   }
   componentDidUpdate(prevProps) {
-    if (this.props.currentTicker !== prevProps.currentTicker) {
+    if (
+      this.props.currentTicker !== prevProps.currentTicker ||
+      this.props.date !== prevProps.date 
+    ) {
       console.log("componentDidUpdate - entering validations");
       this.checkCanBuyOrSell();
       this.checkTransaction();
@@ -112,11 +115,11 @@ class TradeContainer extends Component {
     const sumOfHoldings = (holdings, transaction) => holdings += transaction.quantity;
     
     if (currentTicker && history[currentTicker]) {
-      let holdingsAllOfHistory = history[currentTicker].reduce(sumOfHoldings);
+      let holdingsAllOfHistory = history[currentTicker].reduce(sumOfHoldings, 0);
       let holdingsUpToCurrentDate = history[currentTicker]
         .filter(transaction => moment(date).isSameOrAfter(transaction.date))
-        .reduce(sumOfHoldings);
-      canSell = holdingsAllOfHistory < holdingsUpToCurrentDate ? holdingsAllOfHistory : holdingsUpToCurrentDate;
+        .reduce(sumOfHoldings, 0);
+      canSell = holdingsAllOfHistory > holdingsUpToCurrentDate ? holdingsAllOfHistory : holdingsUpToCurrentDate;
     }
     
     console.log("canBuy", canBuy);

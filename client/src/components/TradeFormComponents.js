@@ -23,12 +23,12 @@ export const LegendWrapper = ({legendTxt, formGroupCheck, children}) => {
 };
 
 export const ValidatedRadioInput = (
-  {labelText, formGroupCheck, validation, valueIfPass, errorTextIfFail, onChange}
+  {labelText, name, formGroupCheck, validation, valueIfPass, errorTextIfFail, onChange}
 ) => {
   return (
     <FormGroup check={formGroupCheck} >
       <Label>
-        <Input className="ml-1" onChange={onChange} type="radio" name={labelText} disabled={!validation} />{'  '}
+        <Input className="ml-1" onChange={onChange} type="radio" name={name} disabled={!validation} />{'  '}
         {
           validation
           ? <div className="ml-4">{`${labelText}    Max:${valueIfPass}`}</div>
