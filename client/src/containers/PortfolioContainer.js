@@ -3,11 +3,74 @@ import {connect} from 'react-redux';
 import {Table} from 'reactstrap';
 import ColumnHeadings from '../components/ColumnHeadings';
 import ViewHeader from '../components/ViewHeader';
+import {getCurrentPriceForTicker} from '../helpers/helpers';
 
-
+const mapStateToProps = (state) => {
+  return {
+    cash: state.portfolio.cash,
+    history: state.portfolio.history,
+    stockData: state.stocks.data,
+    currentDate: state.date.current,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
 class PortfolioContainer extends Component {
   
+
+  /* data format for summaryOfHoldings = {
+    ticker: {
+      currentPrice: 
+      quantity: 
+      profitOrLoss:
+    }, ... etc
+  }*/
+  getSummaryOfHoldings = () => {
+    const {history, stockData, currentDate} = this.props;
+    return Object.keys(history).reduce((summaryOfHoldings, ticker) => {
+      const currentPriceForTicker = getCurrentPriceForTicker(stockData, ticker, currentDate);
+      summaryOfHoldings[ticker] = {
+        currentPrice: currentPriceForTicker,
+        quantity: history[ticker].reduce((quantity, transaction) => {
+          return quantity += transaction.quantity;
+        }, 0),
+        profitOrLoss: history[ticker].reduce((profitOrLoss, transaction) => {
+          const {price, quantity} = transaction;
+          return profitOrLoss += currentPriceForTicker * quantity - price * quantity;
+        }, 0)
+      };
+      return summaryOfHoldings;
+    }, {});
+  }
+  calculateValueOfStocks = (summaryOfHoldings) => {
+    return Object.keys(summaryOfHoldings).reduce((valueOfStocks, ticker) => {
+      const {currentPrice, quantity} = summaryOfHoldings[ticker];
+      return valueOfStocks += currentPrice * quantity;
+    }, 0);
+  }
+  calculateProfitLoss = (summaryOfHoldings) => {
+    return Object.keys(summaryOfHoldings).reduce((profitOrLoss, ticker) => {
+      return profitOrLoss += summaryOfHoldings[ticker].profitOrLoss;
+    }, 0);
+  }
   render(){
+    const {cash, history} = this.props;
+    const summaryOfHoldings = this.getSummaryOfHoldings();
+    const valueOfStocks = this.calculateValueOfStocks(summaryOfHoldings);
+    const profitOrLoss = this.calculateProfitLoss(summaryOfHoldings);
+    const portfolioMap = Object.keys(summaryOfHoldings).map(ticker => {
+      const thisHolding = summaryOfHoldings[ticker];
+      return (
+        <tr key={ticker}>
+          <td>{ticker}</td>
+          <td>{thisHolding.quantity}</td>
+          <td>{thisHolding.currentPrice}</td>
+          <td>{thisHolding.currentPrice * thisHolding.quantity}</td>
+          <td>{thisHolding.profitOrLoss}</td>
+        </tr>
+      );
+    })
     return (
       <div>
         <ViewHeader heading={'Portfolio'} />
@@ -15,18 +78,15 @@ class PortfolioContainer extends Component {
           <thead>
             <tr>
               <ColumnHeadings 
-                headings={["Cost Basis","Current Value","Profit/Loss","7d","14d","28d"]}
+                headings={["Cash On Hand","Value of Stocks", "Profit/Loss"]}
               />
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Otto</td>
-              <td>Otto</td>
+              <td>{cash}</td>
+              <td>{valueOfStocks}</td>
+              <td>{profitOrLoss}</td>
             </tr>
           </tbody>
         </Table>
@@ -34,37 +94,12 @@ class PortfolioContainer extends Component {
           <thead>
             <tr>
               <ColumnHeadings 
-                headings = {[ 
-                  "Symbol","Quantity","Cost Basis","Current Value","Profit/Loss","Current Price","7d","14d","28d","Trade?"
-                ]} 
+                headings = {["Symbol","Quantity","Current Price","Current Value","Profit/Loss",]} 
               />
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td>Thornton</td>
-              <td>Thornton</td>
-              <td>Thornton</td>
-              <td>Thornton</td>
-              <td>Thornton</td>
-              <td>Thornton</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <td>the Bird</td>
-              <td>the Bird</td>
-              <td>the Bird</td>
-              <td>the Bird</td>
-              <td>the Bird</td>
-              <td>the Bird</td>
-            </tr>
+            {portfolioMap}
           </tbody>
         </Table>
       </div>
@@ -72,13 +107,5 @@ class PortfolioContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    cash: state.portfolio.cash,
-    history: state.portfolio.history
-  };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
+
 export default connect(mapStateToProps, mapDispatchToProps)(PortfolioContainer);
