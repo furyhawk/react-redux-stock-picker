@@ -67,6 +67,19 @@ class TradeContainer extends Component {
         quantity: buyOrSell === 'buy' ? quantity : -1*quantity
       }
     });
+    //Displays a transaction success message
+    this.setState({        
+      alert: {
+        send: true,
+        message: 'Transaction succeeded!',
+        color: 'success'
+      }
+    //And then makes it disappear
+    }, () => {
+      setTimeout(() => {
+        this.setState({alert: {send: false}})
+      }, 3000);
+    });
   }
   
   // FORM HANDLERS
