@@ -20,7 +20,7 @@ export default class Example extends Component {
   render() {
     return (
       <div>
-        <Navbar color={this.props.color} light>
+        <Navbar className="mt-3" color={this.props.color} light>
           <NavbarBrand href="/" className="mr-auto">
             <h1>Time Traveling Stock Picker</h1>
           </NavbarBrand>

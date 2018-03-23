@@ -4014,6 +4014,7 @@
        -ms-flex-pack: justify;
            justify-content: space-between;
    padding: 1rem 1rem;
+   border: 1px solid #00000020;
  }
  
  .navbar > .container,
