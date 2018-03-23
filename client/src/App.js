@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
 } from 'react-router-dom';
 import {NavItem, NavLink} from 'reactstrap';
 import DateSliderContainer from './containers/DateSliderContainer';
@@ -44,6 +45,7 @@ class App extends Component {
                     <div>
                       <SelectAction  />
                       <Switch>
+                        <Route exact path="/" render={() => (<Redirect to="/portfolio"/>)} />
                         <Route path='/trade/:ticker?' component={TradeContainer} />
                         <Route path='/transactions' component={TransactionsContainer} />
                         <Route path='/portfolio' component={PortfolioContainer} />
