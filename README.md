@@ -44,12 +44,10 @@ _See the aggregation and total value of transactions. Return to the Trade panel 
 
 ## Installation
 1. `git clone [this repo]`
-2. `npm install`
-3. `node server`
 2. `cd client`
 3. `npm install`
 4. `npm start`
-5. open a browswer to `http://localhost:8081`
+5. open a browswer to `http://localhost:3000`
 
 ## To Do 
 - Add a Transactions Panel
