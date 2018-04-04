@@ -4,6 +4,14 @@ Fideligard is a time-traveling stock portfolio simulator. Users can go back in t
 
 A React SPA, presenting output from Quandl's stock API for End-of-Day stock prices.
 
+## Features
+**Execute a Validated Trade**  
+<img src="https://raw.githubusercontent.com/patrickklima/react-redux-stock-picker/master/docs/GIFs/1-executing-a-validated-trade.gif" 
+     width="600" alt="Execute a Validated Trade">    
+
+**Change the Date, Buy a Stock, and View Transactions**  
+<img src="https://raw.githubusercontent.com/patrickklima/react-redux-stock-picker/master/docs/GIFs/2-changing-date-buying-a-stock-and-viewing-transactions.gif" width="600" alt="Change the Date, Buy a Stock, and View Transactions">
+
 ## Tech Stack
 - Node.js 
 - React.js 
