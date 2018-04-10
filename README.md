@@ -1,6 +1,6 @@
 # React/Redux Stock Trading (with time travel)
 
-Fideligard is a time-traveling stock portfolio simulator. Users can go back in time and spend fake money on stock trades to assemble their dream portfolio.
+With the time-traveling stock picker, users can go back in time and spend fake money on stock trades to assemble their dream portfolio.
 
 A React SPA, presenting output from Quandl's stock API for End-of-Day stock prices.
 
